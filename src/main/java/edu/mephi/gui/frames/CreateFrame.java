@@ -62,7 +62,6 @@ public class CreateFrame extends JFrame {
         panel.add(priceField);
         confirmButton.addActionListener(new confirmButtonActionListener());
 
-
         this.add(panel, BorderLayout.CENTER);
         this.add(confirmButton, BorderLayout.SOUTH);
         this.add(errLabel, BorderLayout.NORTH);
@@ -114,6 +113,4 @@ public class CreateFrame extends JFrame {
             performEndTask();
 		}
     }
-
-
 }

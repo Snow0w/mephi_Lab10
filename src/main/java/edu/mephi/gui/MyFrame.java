@@ -42,9 +42,6 @@ public class MyFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
-        
-
-        
 
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -72,6 +69,8 @@ public class MyFrame extends JFrame {
         create.addActionListener(new confirmButtonActionListener());
         delete.addActionListener(new deleteActionListener());
         save.addActionListener(new saveActionListener());
+        change.addActionListener(new changeActionListener());
+        quit.addActionListener(new quitActionListener());
 
         this.add(menuBar, BorderLayout.NORTH);
         panel.add(autoScrollTable, BorderLayout.CENTER);
@@ -133,6 +132,46 @@ public class MyFrame extends JFrame {
 		}
     }
 
+    private class changeActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            int row = autoTable.getSelectedRow();
+
+            if (row == -1)
+                return;
+            String[] old = modelTable.getRaw(row);
+            String[] newval = new String[4];
+            newval[0] = JOptionPane.showInputDialog(MyFrame.this, "Марка", old[0]);
+            newval[1] = JOptionPane.showInputDialog(MyFrame.this, "Модель", old[1]);
+            newval[2] = JOptionPane.showInputDialog(MyFrame.this, "Год", old[2]);
+            newval[3] = JOptionPane.showInputDialog(MyFrame.this, "Цена", old[3]);
+            try {
+                Integer.parseInt(newval[2]);
+            } catch (Exception exc) {
+                newval[2] = old[2];
+            }
+            try {
+                Double.parseDouble(newval[3]);
+            } catch (Exception exc) {
+                newval[3] = old[3];
+            }
+            for (int i = 0; i < 4; i++) {
+                if (newval[i].length() == 0)
+                    modelTable.setValueAt(old[i], row, i);
+                else
+                    modelTable.setValueAt(newval[i], row, i);
+            }
+		}
+    }
+
+    private class quitActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+		}
+    }
     public void setEditFlag(boolean flag) {
         this.editFlag = flag;
     }

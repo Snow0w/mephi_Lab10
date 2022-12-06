@@ -27,6 +27,15 @@ public class AutoTableModel extends AbstractTableModel {
         return dataArrayList.get(rowIndex)[columnIndex];
 	}
 
+	public String[] getRaw(int rowIndex) {
+        return dataArrayList.get(rowIndex);
+	}
+
+    public void setValueAt(String value, int rowIndex, int columnIndex) {
+        String[] old = dataArrayList.get(rowIndex);
+        old[columnIndex] = value;
+    }
+
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
@@ -46,6 +55,5 @@ public class AutoTableModel extends AbstractTableModel {
         dataArrayList.remove(index);
         fireTableDataChanged();
     }
-
 }
 
