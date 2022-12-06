@@ -10,9 +10,6 @@ public class AutoTableModel extends AbstractTableModel {
 
     public AutoTableModel() {
         dataArrayList = new ArrayList<String[]>();
-        // for (int i = 0; i < dataArrayList.size(); i++) {
-        //     dataArrayList.add(new String[colCnt]);
-        // }
     }
 
 	@Override
@@ -42,6 +39,12 @@ public class AutoTableModel extends AbstractTableModel {
 
     public void addRow(String[] row) {
         dataArrayList.add(row);
+        fireTableDataChanged();
+    }
+
+    public void deleteRow(int index) {
+        dataArrayList.remove(index);
+        fireTableDataChanged();
     }
 
 }
